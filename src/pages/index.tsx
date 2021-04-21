@@ -4,6 +4,8 @@ import ptBR from "date-fns/locale/pt-BR";
 import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
 
+import styles from "./home.module.scss";
+
 type Episode = {
   id: string;
   title: string;
@@ -18,15 +20,29 @@ type Episode = {
 
 type HomeProps = {
   // quando declaramos um array, ele pode ser de vários tipos, neste caso estamos definindo que ele é do tipo Episodes.
-  episodes: Episode[];
+  latestEpisodes: Episode[];
+  allEpisodes: Episode[];
 };
 
-export default function Home(props: HomeProps) {
+export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   return (
-    <>
-      <h1>Index</h1>
-      <p>{JSON.stringify(props.episodes)}</p>
-    </>
+    <div className={styles.homepage}>
+      <section className={styles.latestEpisodes}>
+        <h2>Últimos lançamentos</h2>
+        <ul>
+          {/* sempre que queremos retornar uma lista, ou percorrer alguma coisa, vamos utilizar o map, porque o map retornando algo. */}
+          {latestEpisodes.map((episode) => {
+            return (
+              // toda primeira propriedade do React precisa ser passado uma key para o primeiro objeto, onde ele identifica cada item com o único.
+              <li key={episode.id}>
+                <a href="#">{episode.title}</a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+      <section className={styles.allEpisodes}></section>
+    </div>
   );
 }
 
@@ -59,9 +75,12 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   });
 
+  const latestEpisodes = episodes.slice(0, 2);
+  const allEpisodes = episodes.slice(2, episodes.lenght);
   return {
     props: {
-      episodes,
+      latestEpisodes,
+      allEpisodes,
     },
     revalidate: 60 * 60 * 8, // define o intervalo em qua a aplicação fará uma nova chamada para a api e atualizará a pagina de 8 em 8 horas.
   };
