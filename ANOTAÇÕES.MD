@@ -1,3 +1,8 @@
+- [Anotações](#anotações)
+  - [O Arquivo \_app.tsx](#o-arquivo-_apptsx)
+  - [O Arquivo \_document.tsx](#o-arquivo-_documenttsx)
+  - [A Pasta Components](#a-pasta-components)
+
 # Anotações
 
 Exemplo do uso do **typeScript**:
@@ -53,3 +58,16 @@ return (
 Extensão **tsx: typescript + jsx(xml no javascript)**
 
 Qualquer aplicação react podemos importar arquivos css direto nos arquivos dos componentes.
+
+## O Arquivo \_app.tsx
+
+    O Arquivo é um arquivo que já é criado por padrão no next e ele é um arquivo que por padrão fica em volta de todas as páginas do seu app.
+    O Next tem um sistema de rotas próprio, então sempre que eu chamo qualquer rota(pagina) do meu projeto, o _app vai ser chamado também.
+
+## O Arquivo \_document.tsx
+
+Ele vai ficar por volta de toda a nossa aplicação mas vai ser chamado uma única vez.
+
+## A Pasta Components
+
+Geralmente é colocado nesta página componentes que são utilizados em mais de uma página, ou seja, componentes globais.
