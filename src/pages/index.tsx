@@ -15,7 +15,7 @@ type Episode = {
   members: string;
   duration: string;
   durationAsString: string;
-  published_at: string;
+  publishAt: string;
   url: string;
 };
 
@@ -48,7 +48,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                 <div className={styles.episodeDetails}>
                   <a href="#">{episode.title}</a>
                   <p>{episode.members}</p>
-                  <span>{episode.published_at}</span>
+                  <span>{episode.publishAt}</span>
                   <span>{episode.durationAsString}</span>
                 </div>
                 <button type="button">
