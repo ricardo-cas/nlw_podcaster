@@ -46,7 +46,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                 />
                 {/* adicionando os detalhes dos episódios */}
                 <div className={styles.episodeDetails}>
-                  <a href="#">{episode.title}</a>
+                  <a href="#">{episode.title}, "Ricardo"</a>
                   <p>{episode.members}</p>
                   <span>{episode.publishAt}</span>
                   <span>{episode.durationAsString}</span>
