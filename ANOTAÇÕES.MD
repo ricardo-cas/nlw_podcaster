@@ -51,3 +51,5 @@ return (
 ```
 
 Extensão **tsx: typescript + jsx(xml no javascript)**
+
+Qualquer aplicação react podemos importar arquivos css direto nos arquivos dos componentes.
