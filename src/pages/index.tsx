@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import { api } from "../services/api";
 
 type Episode = {
   id: string;
@@ -21,10 +22,15 @@ export default function Home(props: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch(
-    "http://localhost:3333/episodes?_limit=12&_sort=published_at&_order=desc"
-  ); // adicionando alguns parâmetros direto na chamada da API para filtrar os resultados.
-  const data = await response.json(); // dados retornados da API
+  const { data } = await api.get("episodes", {
+    //collocando os parametros direto na syntaxe, pois estamos utilizando o Axios
+    // adicionando alguns parâmetros direto na chamada da API para filtrar os resultados.
+    params: {
+      _limit: 12,
+      _sort: "published_at",
+      _order: "desc",
+    },
+  });
 
   return {
     props: {
