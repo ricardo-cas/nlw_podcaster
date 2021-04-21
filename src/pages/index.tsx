@@ -1,5 +1,6 @@
 import { GetStaticProps } from "next";
 import { format, parseISO } from "date-fns";
+import Image from "next/image";
 import ptBR from "date-fns/locale/pt-BR";
 import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
@@ -36,7 +37,13 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
               // toda primeira propriedade do React precisa ser passado uma key para o primeiro objeto, onde ele identifica cada item com o único.
               <li key={episode.id}>
                 {/* adicionando a imagem do episódio */}
-                <img src={episode.thumbnail} alt={episode.title} />
+                <Image
+                  width={192}
+                  height={192}
+                  src={episode.thumbnail}
+                  alt={episode.title}
+                  objectFit="cover"
+                />
                 {/* adicionando os detalhes dos episódios */}
                 <div className={styles.episodeDetails}>
                   <a href="#">{episode.title}</a>
