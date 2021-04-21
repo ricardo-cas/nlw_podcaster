@@ -35,7 +35,18 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             return (
               // toda primeira propriedade do React precisa ser passado uma key para o primeiro objeto, onde ele identifica cada item com o único.
               <li key={episode.id}>
-                <a href="#">{episode.title}</a>
+                {/* adicionando a imagem do episódio */}
+                <img src={episode.thumbnail} alt={episode.title} />
+                {/* adicionando os detalhes dos episódios */}
+                <div className={styles.episodeDetails}>
+                  <a href="#">{episode.title}</a>
+                  <p>{episode.members}</p>
+                  <span>{episode.published_at}</span>
+                  <span>{episode.durationAsString}</span>
+                </div>
+                <button type="button">
+                  <img src="/play-green.svg" alt="Tocar episodio" />
+                </button>
               </li>
             );
           })}
