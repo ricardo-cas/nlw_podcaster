@@ -71,3 +71,5 @@ Ele vai ficar por volta de toda a nossa aplicação mas vai ser chamado uma úni
 ## A Pasta Components
 
 Geralmente é colocado nesta página componentes que são utilizados em mais de uma página, ou seja, componentes globais.
+
+No React não utilizamos a propriedade class, e sim **className** ex: `<header className="astronauta"`
