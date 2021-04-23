@@ -2,6 +2,7 @@
   - [O Arquivo \_app.tsx](#o-arquivo-_apptsx)
   - [O Arquivo \_document.tsx](#o-arquivo-_documenttsx)
   - [A Pasta Components](#a-pasta-components)
+  - [Next Routing](#next-routing)
 
 # Anotações
 
@@ -73,3 +74,7 @@ Ele vai ficar por volta de toda a nossa aplicação mas vai ser chamado uma úni
 Geralmente é colocado nesta página componentes que são utilizados em mais de uma página, ou seja, componentes globais.
 
 No React não utilizamos a propriedade class, e sim **className** ex: `<header className="astronauta"`
+
+## Next Routing
+
+O Next funciona no sistema de File System Routing, ou seja, todos os arquivos que estiverem na pasta **pages** (sem o _underline_ na frente) são os arquivos que formam as rotas da aplicação.
