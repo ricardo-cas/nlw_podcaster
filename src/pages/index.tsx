@@ -5,6 +5,8 @@ import Link from "next/link";
 import ptBR from "date-fns/locale/pt-BR";
 import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
+import { useContext } from "react";
+import { PlayerContext } from "../contexts/PlayerContext";
 
 import styles from "./home.module.scss";
 
@@ -26,10 +28,11 @@ type HomeProps = {
 };
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+  const player = useContext(PlayerContext);
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
-        <h2>Últimos lançamentos</h2>
+        <h2>Últimos lançamentos {player} </h2>
         <ul>
           {/* sempre que queremos retornar uma lista, ou percorrer alguma coisa, vamos utilizar o map, porque o map retornando algo. */}
           {latestEpisodes.map((episode) => {

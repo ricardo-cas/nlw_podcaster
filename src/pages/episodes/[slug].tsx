@@ -60,8 +60,25 @@ export default function Episode({ episode }: EpisodeProps) {
     </div>
   );
 }
-
+// método obrigatório ser usado em toda rota que é estática (que tem o GetStaticProps)
+// e que possuí os parâmetros dinâmicos como no caso o nome do episódio em colchetes []
 export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = await api.get("episodes", {
+    params: {
+      _limit: 12,
+      _sort: "published_at",
+      _order: "desc",
+    },
+  });
+
+  const paths = data.map((episode) => {
+    return {
+      params: {
+        slug: episode.id,
+      },
+    };
+  });
+
   return {
     paths: [],
     fallback: "blocking",
