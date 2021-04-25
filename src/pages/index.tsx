@@ -28,11 +28,11 @@ type HomeProps = {
 };
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const player = useContext(PlayerContext);
+  const { play } = useContext(PlayerContext);
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
-        <h2>Últimos lançamentos {player} </h2>
+        <h2>Últimos lançamentos</h2>
         <ul>
           {/* sempre que queremos retornar uma lista, ou percorrer alguma coisa, vamos utilizar o map, porque o map retornando algo. */}
           {latestEpisodes.map((episode) => {
@@ -56,7 +56,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <span>{episode.publishAt}</span>
                   <span>{episode.durationAsString}</span>
                 </div>
-                <button type="button">
+                <button type="button" onClick={() => play(episode)}>
                   <img src="/play-green.svg" alt="Tocar episodio" />
                 </button>
               </li>

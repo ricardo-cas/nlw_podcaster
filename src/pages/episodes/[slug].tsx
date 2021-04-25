@@ -1,9 +1,6 @@
-// Criando este arquivo para na hora da navegação (roteamento) da aplicação next, ele ficar assim:
-// site/episode?slug
 import { format, parseISO } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { api } from "../../services/api";
@@ -27,8 +24,6 @@ type EpisodeProps = {
 };
 
 export default function Episode({ episode }: EpisodeProps) {
-  // const router = useRouter();
-  // return <h1>{router.query.slug}</h1>;
   return (
     <div className={styles.episode}>
       <div className={styles.thumbnailContainer}>
