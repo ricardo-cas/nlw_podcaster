@@ -84,7 +84,7 @@ export function Player() {
             className={styles.playButton}
             disabled={!episode}
             onClick={togglePlay}
-            onPLay={() => setPlayingState(true)}
+            onPlay={() => setPlayingState(true)}
             onPause={() => setPlayingState(false)}
           >
             {isPlaying ? (
