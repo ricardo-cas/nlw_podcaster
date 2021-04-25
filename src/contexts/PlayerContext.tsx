@@ -14,6 +14,7 @@ type PlayerContextData = {
   currentEpisodeIndex: number; // vai ser o índice que aponta em qual posição da lista é o episodio que está tocando atualmente.
   isPlaying: boolean;
   play: (episode: Episode) => void;
+  playList: (list: Episode[], index: number) => void;
   togglePlay: () => void;
   setPlayingState: (state: boolean) => void;
 };
@@ -31,6 +32,12 @@ export function PlayerContextProvider({
   const [episodeList, setEpisodeList] = useState([]);
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  function playList(list: Episode[], index: number) {
+    setEpisodeList(list);
+    setCurrentEpisodeIndex(index);
+    setIsPlaying(true);
+  }
 
   function play(episode: Episode) {
     setEpisodeList([episode]);
@@ -52,6 +59,7 @@ export function PlayerContextProvider({
         episodeList,
         currentEpisodeIndex,
         play,
+        playList,
         isPlaying,
         togglePlay,
         setPlayingState,
