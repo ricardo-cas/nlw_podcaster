@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useRef, useEffect } from "react";
 import { PlayerContext } from "../../contexts/PlayerContext";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -7,7 +7,27 @@ import "rc-slider/assets/index.css";
 import styles from "./styles.module.scss";
 
 export function Player() {
-  const { episodeList, currentEpisodeIndex } = useContext(PlayerContext);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const {
+    episodeList,
+    currentEpisodeIndex,
+    isPlaying,
+    togglePlay,
+    setPlayingState,
+  } = useContext(PlayerContext);
+
+  useEffect(() => {
+    if (!audioRef.current) {
+      return;
+    }
+
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
 
   const episode = episodeList[currentEpisodeIndex];
   return (
@@ -50,7 +70,7 @@ export function Player() {
           <span>00:00</span>
         </div>
 
-        {episode && <audio src={episode.url} autoPlay />}
+        {episode && <audio src={episode.url} ref={audioRef} autoPlay />}
 
         <div className={styles.buttons}>
           <button type="button" disabled={!episode}>
@@ -63,8 +83,15 @@ export function Player() {
             type="button"
             className={styles.playButton}
             disabled={!episode}
+            onClick={togglePlay}
+            onPLay={() => setPlayingState(true)}
+            onPause={() => setPlayingState(false)}
           >
-            <img src="/play.svg" alt="Tocar" />
+            {isPlaying ? (
+              <img src="/pause.svg" alt="Tocar" />
+            ) : (
+              <img src="/play.svg" alt="Tocar" />
+            )}
           </button>
           <button type="button" disabled={!episode}>
             <img src="/play-next.svg" alt="Proximo" />

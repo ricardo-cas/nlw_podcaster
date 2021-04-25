@@ -12,7 +12,10 @@ type Episode = {
 type PlayerContextData = {
   episodeList: Episode[];
   currentEpisodeIndex: number; // vai ser o índice que aponta em qual posição da lista é o episodio que está tocando atualmente.
+  isPlaying: boolean;
   play: (episode: Episode) => void;
+  togglePlay: () => void;
+  setPlayingState: (state: boolean) => void;
 };
 
 // exportando o contexto com um valor default
