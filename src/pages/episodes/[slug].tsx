@@ -1,11 +1,9 @@
-// Criando este arquivo para na hora da navegação (roteamento) da aplicação next, ele ficar assim:
-// site/episode?slug
 import { format, parseISO } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import { usePlayer } from "../../contexts/PlayerContext";
 import { api } from "../../services/api";
 import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
 import styles from "./episode.module.scss";
@@ -27,8 +25,8 @@ type EpisodeProps = {
 };
 
 export default function Episode({ episode }: EpisodeProps) {
-  // const router = useRouter();
-  // return <h1>{router.query.slug}</h1>;
+  const { play } = usePlayer();
+
   return (
     <div className={styles.episode}>
       <div className={styles.thumbnailContainer}>
@@ -44,7 +42,11 @@ export default function Episode({ episode }: EpisodeProps) {
           objectFit="cover"
         />
         <button type="button">
-          <img src="/play.svg" alt="Tocar episódio" />
+          <img
+            src="/play.svg"
+            alt="Tocar episódio"
+            onClick={() => play(episode)}
+          />
         </button>
       </div>
       <header>
@@ -60,8 +62,25 @@ export default function Episode({ episode }: EpisodeProps) {
     </div>
   );
 }
-
+// método obrigatório ser usado em toda rota que é estática (que tem o GetStaticProps)
+// e que possuí os parâmetros dinâmicos como no caso o nome do episódio em colchetes []
 export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = await api.get("episodes", {
+    params: {
+      _limit: 12,
+      _sort: "published_at",
+      _order: "desc",
+    },
+  });
+
+  const paths = data.map((episode) => {
+    return {
+      params: {
+        slug: episode.id,
+      },
+    };
+  });
+
   return {
     paths: [],
     fallback: "blocking",
