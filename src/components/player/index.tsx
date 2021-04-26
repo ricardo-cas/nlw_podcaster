@@ -13,7 +13,9 @@ export function Player() {
     episodeList,
     currentEpisodeIndex,
     isPlaying,
+    isLooping,
     togglePlay,
+    toggleLoop,
     setPlayingState,
     playNext,
     playPrevious,
@@ -74,7 +76,9 @@ export function Player() {
           <span>00:00</span>
         </div>
 
-        {episode && <audio src={episode.url} ref={audioRef} autoPlay />}
+        {episode && (
+          <audio src={episode.url} ref={audioRef} autoPlay loop={isLooping} />
+        )}
 
         <div className={styles.buttons}>
           <button type="button" disabled={!episode}>
@@ -108,7 +112,12 @@ export function Player() {
           >
             <img src="/play-next.svg" alt="Proximo" />
           </button>
-          <button type="button" disabled={!episode}>
+          <button
+            type="button"
+            disabled={!episode}
+            onClick={toggleLoop}
+            className={isLooping ? styles.isActive : ""}
+          >
             <img src="/repeat.svg" alt="Repetir" />
           </button>
         </div>

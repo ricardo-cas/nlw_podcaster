@@ -13,9 +13,11 @@ type PlayerContextData = {
   episodeList: Episode[];
   currentEpisodeIndex: number; // vai ser o índice que aponta em qual posição da lista é o episodio que está tocando atualmente.
   isPlaying: boolean;
+  isLooping: boolean;
   play: (episode: Episode) => void;
   playList: (list: Episode[], index: number) => void;
   togglePlay: () => void;
+  toggleLoop: () => void;
   setPlayingState: (state: boolean) => void;
   playNext: () => void;
   playPrevious: () => void;
@@ -36,6 +38,7 @@ export function PlayerContextProvider({
   const [episodeList, setEpisodeList] = useState([]);
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
 
   function playList(list: Episode[], index: number) {
     setEpisodeList(list);
@@ -53,7 +56,9 @@ export function PlayerContextProvider({
   function togglePlay() {
     setIsPlaying(!isPlaying);
   }
-
+  function toggleLoop() {
+    setIsLooping(!isLooping);
+  }
   function setPlayingState(state: boolean) {
     setIsPlaying(state);
   }
@@ -61,8 +66,6 @@ export function PlayerContextProvider({
   const hasNext = currentEpisodeIndex + 1 < episodeList.length;
 
   function playNext() {
-    const nextEpisodeIndex = currentEpisodeIndex + 1;
-
     if (hasNext) {
       setCurrentEpisodeIndex(currentEpisodeIndex + 1);
     }
@@ -84,6 +87,8 @@ export function PlayerContextProvider({
         playNext,
         playPrevious,
         isPlaying,
+        isLooping,
+        toggleLoop,
         togglePlay,
         setPlayingState,
         hasNext,
