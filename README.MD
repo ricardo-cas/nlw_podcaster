@@ -53,4 +53,4 @@ The app will be available for access on your browser at `http://localhost:3000`
 
 ---
 
-Develop with 💜 by [Ricardo Costa](https://ricardo.digital) 👋 [Check out my LinkedIn](https://www.linkedin.com/in/ricardocas/)
+Made with 💜 by [Ricardo Costa](https://ricardo.digital) 👋 [Check out my LinkedIn](https://www.linkedin.com/in/ricardocas/)
